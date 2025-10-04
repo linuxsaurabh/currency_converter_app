@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.build/
+.dist/
+htmlcov/
+*.egg-info/
+*.egg
+.git
+.gitignore
+.DS_Store
+.idea
+.vscode
+*.log
+
+# Local files
+instance/
+
+# OS files
+Thumbs.db
+desktop.ini
