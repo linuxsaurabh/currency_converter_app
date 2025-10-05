@@ -16,6 +16,7 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
     steps:
       - uses: actions/checkout@v3
 
@@ -39,7 +40,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     needs: test
-    if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/develop'
     steps:
       - uses: actions/checkout@v3
 
@@ -73,4 +74,15 @@ jobs:
         run: |
           git add helm/currency-converter/Chart.yaml helm/currency-converter/values.yaml
           git commit -m "Update Helm chart to v1.2.${{ github.run_number }}"
-          git push origin main
+          git push origin develop
+
+  tag-on-main-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && github.base_ref == 'main'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create and push Git tag
+        run: |
+          git tag v1.2.${{ github.run_number }}
+          git push origin v1.2.${{ github.run_number }}
