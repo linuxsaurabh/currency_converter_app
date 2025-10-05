@@ -4,7 +4,7 @@ A simple currency converter application with:
 - **Backend**: Flask REST API
 - **Frontend**: Basic HTML/JS UI
 - **Packaging**: Docker & Helm
-- **Deployment**: Local Kubernetes cluster via Terraform + Kind/Minikube
+- **Deployment**: Local Kubernetes cluster via Terraform + Kind
 - **GitOps**: ArgoCD
 - **CI/CD**: GitHub Actions (build, test, Docker push, Helm updates)
 
@@ -17,7 +17,7 @@ A simple currency converter application with:
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm 3](https://helm.sh/docs/intro/install/)
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
-- [kind](https://kind.sigs.k8s.io/) or [minikube](https://minikube.sigs.k8s.io/)
+- [kind](https://kind.sigs.k8s.io/)
 - [ArgoCD](https://argo-cd.readthedocs.io/en/stable/getting_started/)
 
 ---
