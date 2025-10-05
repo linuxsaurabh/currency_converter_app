@@ -46,4 +46,13 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: imzerocool/currency-converter:v1.1.${{ github.run_number }}
+          tags: imzerocool/currency-converter:v1.2.${{ github.run_number }}
+
+      - name: update the helm chart version and image tag
+        run: |
+          echo "Updating helm chart version and image tag"
+          sed -i "s/^version: .*/version: v1.2.${{ github.run_number }}\n/" helm/currency-converter/Chart.yaml
+          sed -i "s/^appVersion: .*/appVersion: \"1.2.${{ github.run_number }}\"/" helm/currency-converter/Chart.yaml
+          sed -i "s|^  tag: .*|  tag: v1.2.${{ github.run_number }}|" helm/currency-converter/values.yaml
+          cat helm/currency-converter/Chart.yaml
+          cat helm/currency-converter/values.yaml
