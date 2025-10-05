@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Currency Converter</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Currency Converter</h1>
+    <div class="form-container">
+      <label>Amount:
+        <input type="number" id="amount" value="100" step="any" required>
+      </label>
+      <label>From:
+        <select id="from">
+          {% for c in supported %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+        </select>
+      </label>
+      <label>To:
+        <select id="to">
+          {% for c in supported %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+        </select>
+      </label>
+      <button type="button" id="convert">Convert</button>
+    </div>
+    <div id="result"></div>
+  </div>
+  <script src="/static/main.js"></script>
+</body>
+</html>
