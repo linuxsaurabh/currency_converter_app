@@ -7,4 +7,5 @@ service:
   type: ClusterIP
   port: 80
 ingress:
-  enabled: false
+  enabled: true
+  host: localhost
