@@ -10,6 +10,9 @@ on:
     types:
       - closed
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -28,15 +31,15 @@ jobs:
       - name: Run tests
         run: pytest --maxfail=1 --disable-warnings -q
 
-      - name: check code style
+      - name: Check code style
         run: |
           pip install flake8
           flake8 app tests --count --show-source --statistics
-   
+
   build-and-push:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main' 
+    if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
 
@@ -54,11 +57,20 @@ jobs:
           push: true
           tags: imzerocool/currency-converter:v1.2.${{ github.run_number }}
 
-      - name: update the helm chart version and image tag
+      - name: Update Helm chart version and image tag
         run: |
-          echo "Updating helm chart version and image tag"
-          sed -i "s/^version: .*/version: v1.2.${{ github.run_number }}\n/" helm/currency-converter/Chart.yaml
+          echo "Updating Helm chart version and image tag"
+          sed -i "s/^version: .*/version: v1.2.${{ github.run_number }}/" helm/currency-converter/Chart.yaml
           sed -i "s/^appVersion: .*/appVersion: \"1.2.${{ github.run_number }}\"/" helm/currency-converter/Chart.yaml
           sed -i "s|^  tag: .*|  tag: v1.2.${{ github.run_number }}|" helm/currency-converter/values.yaml
-          cat helm/currency-converter/Chart.yaml
-          cat helm/currency-converter/values.yaml
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Commit and push updated Helm chart
+        run: |
+          git add helm/currency-converter/Chart.yaml helm/currency-converter/values.yaml
+          git commit -m "Update Helm chart to v1.2.${{ github.run_number }}"
+          git push origin main
