@@ -21,6 +21,11 @@ jobs:
 
       - name: Run tests
         run: pytest --maxfail=1 --disable-warnings -q
+
+      - name: check code style
+        run: |
+          pip install flake8
+          flake8 app tests
    
   build-and-push:
     runs-on: ubuntu-latest
