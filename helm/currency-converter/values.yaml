@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: imzerocool/currency-converter
-  tag: v1
+  tag: v1.2.16
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
