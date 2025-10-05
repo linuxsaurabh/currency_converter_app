@@ -62,9 +62,13 @@ def convert():
         amount = float(amount)
 
         if from_curr not in SUPPORTED_CURRENCIES:
-            return jsonify({'error': f'unsupported source currency: {from_curr}'}), 400
+            return jsonify({
+                'error': f'unsupported source currency: {from_curr}'
+            }), 400
         if to_curr not in SUPPORTED_CURRENCIES:
-            return jsonify({'error': f'unsupported target currency: {to_curr}'}), 400
+            return jsonify({
+                'error': f'unsupported target currency: {to_curr}'
+            }), 400
 
         converted = convert_amount(amount, from_curr, to_curr)
 
@@ -87,7 +91,9 @@ def convert():
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', supported=sorted(list(SUPPORTED_CURRENCIES)))
+    return render_template(
+        'index.html', supported=sorted(list(SUPPORTED_CURRENCIES))
+    )
 
 
 if __name__ == '__main__':
