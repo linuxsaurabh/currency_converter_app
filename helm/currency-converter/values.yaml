@@ -1,6 +1,6 @@
 replicaCount: 2
 image:
-  repository: imzerocool/assignment-app
+  repository: imzerocool/currency-converter
   tag: v1
   pullPolicy: IfNotPresent
 service:
