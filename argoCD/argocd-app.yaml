@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: currency-converter
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-username/currency_converter_app
+    targetRevision: develop
+    path: helm/currency-converter
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

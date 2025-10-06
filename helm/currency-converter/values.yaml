@@ -1,10 +1,11 @@
 replicaCount: 2
 image:
-  repository: imzerocool/assignment-app
-  tag: v1
+  repository: imzerocool/currency-converter
+  tag: v1.2.18
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
   port: 80
 ingress:
-  enabled: false
+  enabled: true
+  host: localhost
