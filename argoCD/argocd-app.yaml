@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-username/currency_converter_app
+    repoURL: https://github.com/linuxsaurabh/currency_converter_app
     targetRevision: develop
     path: helm/currency-converter
     helm:
